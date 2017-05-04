@@ -10,7 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426152050) do
+ActiveRecord::Schema.define(version: 20170504060810) do
+
+  create_table "product_reviews", force: :cascade do |t|
+    t.string   "reviewer",    null: false
+    t.string   "title",       null: false
+    t.string   "description", null: false
+    t.date     "review_date", null: false
+    t.float    "score",       null: false
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["product_id"], name: "index_product_reviews_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "asin",                             null: false
+    t.string   "title",                            null: false
+    t.string   "authors"
+    t.string   "binding"
+    t.string   "format"
+    t.string   "ean"
+    t.string   "isbn"
+    t.string   "label"
+    t.string   "number_of_pages"
+    t.string   "product_group"
+    t.date     "publication_date"
+    t.string   "manufacturer"
+    t.string   "publisher"
+    t.string   "studio"
+    t.boolean  "is_adult_product", default: false
+    t.boolean  "is_kindle",        default: false
+    t.integer  "price"
+    t.string   "currency"
+    t.float    "score"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["asin"], name: "index_products_on_asin", unique: true
+  end
 
   create_table "rss_items", force: :cascade do |t|
     t.string   "title"
