@@ -9,10 +9,11 @@ module Batch
     PRODUCT_URL = "https://www.amazon.co.jp/dp/"
 
     def initialize
+      config = Rails.application.secrets.aws_config
       Amazon::Ecs.configure do |options|
-        options[:AWS_access_key_id] = Rails.application.secrets.AWS_access_key_id
-        options[:AWS_secret_key] = Rails.application.secrets.AWS_secret_key
-        options[:associate_tag] = Rails.application.secrets.associate_tag
+        options[:AWS_access_key_id] = config.AWS_access_key_id
+        options[:AWS_secret_key] = config.AWS_secret_key
+        options[:associate_tag] = config.associate_tag
         options[:search_index] = "Books"
         options[:country] = "jp"
       end
@@ -38,6 +39,7 @@ module Batch
         }
         res = nil
         Retryable.retryable(on: [Amazon::RequestError], tries: 4, sleep: 4) do |retries, exception|
+          # puts "#{retries}: #{options}"
           res = Amazon::Ecs.item_search(keyword, options)
           puts "try #{retries} failed with exception: #{exception}" if retries > 0
         end
@@ -50,6 +52,7 @@ module Batch
         attributes = item.get_element("ItemAttributes")
         binding = attributes.get("Binding")
         product = Product.find_or_initialize_by(asin: item.get("ASIN"))
+        # puts "#{item.get("ASIN")}: #{attributes.get("PublicationDate")}"
         product.update(
           title: attributes.get("Title"),
           authors: attributes.get_array("Author").join(","),
@@ -60,7 +63,7 @@ module Batch
           label: attributes.get("Label"),
           number_of_pages: attributes.get("NumberOfPages"),
           product_group: attributes.get("ProductGroup"),
-          publication_date: attributes.get("PublicationDate").to_date,
+          publication_date: attributes.get("PublicationDate"),
           manufacturer: attributes.get("Manufacturer"),
           publisher: attributes.get("Publisher"),
           studio: attributes.get("Studio"),
@@ -78,12 +81,13 @@ module Batch
           page = @agent.get(url)
           puts "try #{retries}, code: #{page&.code} failed with exception: #{exception}" unless page&.code == "200"
         end
+        return unless page.title
 
         reviews = page.search("#revMHRL div.a-section.celwidget")
         Product.transaction do
           product = Product.where(asin: asin).first
           return unless product
-          product.update!(score: extract_score(page.search(".a-icon-star .a-icon-alt")[0].text()))
+          product.update!(score: extract_score(page.search(".a-icon.a-icon-star")[0].text()))
 
           reviews.each do |review|
             row = review.search("div.a-row")
@@ -98,6 +102,9 @@ module Batch
             )
           end
         end
+      rescue => e
+        puts "Error Occured (asin: #{asin}) #{e}"
+        puts e.backtrace
       end
 
       def extract_score(str)
@@ -109,5 +116,5 @@ module Batch
 end
 
 if $0 == __FILE__
-  Batch::AmazonCrawler.new.run("サッカー")
+  Batch::AmazonCrawler.new.run(ARGV[0])
 end

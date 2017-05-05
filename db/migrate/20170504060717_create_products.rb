@@ -11,7 +11,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.string :label
       t.string :number_of_pages
       t.string :product_group
-      t.date :publication_date
+      t.string :publication_date
       t.string :manufacturer
       t.string :publisher
       t.string :studio

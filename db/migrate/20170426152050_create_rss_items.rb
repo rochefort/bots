@@ -6,7 +6,7 @@ class CreateRssItems < ActiveRecord::Migration[5.0]
       t.string :description
       t.string :link
       t.string :guid
-      t.datetime :tweeted_date
+      t.integer :status, default: 0
       t.references :rss_site, foreign_key: true
 
       t.timestamps
