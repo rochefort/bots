@@ -9,11 +9,11 @@ module Batch
     PRODUCT_URL = "https://www.amazon.co.jp/dp/"
 
     def initialize
-      config = Rails.application.secrets.aws_config
+      c = Rails.application.secrets.aws_config
       Amazon::Ecs.configure do |options|
-        options[:AWS_access_key_id] = config.AWS_access_key_id
-        options[:AWS_secret_key] = config.AWS_secret_key
-        options[:associate_tag] = config.associate_tag
+        options[:AWS_access_key_id] = c["AWS_access_key_id"]
+        options[:AWS_secret_key] = c["AWS_secret_key"]
+        options[:associate_tag] = c["associate_tag"]
         options[:search_index] = "Books"
         options[:country] = "jp"
       end
