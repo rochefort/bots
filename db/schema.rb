@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504060810) do
+ActiveRecord::Schema.define(version: 20170506074745) do
+
+  create_table "account_rss_items", force: :cascade do |t|
+    t.integer  "account_id",   null: false
+    t.integer  "rss_item_id",  null: false
+    t.datetime "tweeted_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["account_id"], name: "index_account_rss_items_on_account_id"
+    t.index ["rss_item_id"], name: "index_account_rss_items_on_rss_item_id"
+    t.index [nil, nil], name: "index_account_rss_items_on_account_and_rss_item", unique: true
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "note"
+    t.string   "associate_tag"
+    t.integer  "status"
+    t.string   "keywords"
+    t.string   "encrypted_consumer_key"
+    t.string   "encrypted_consumer_key_iv"
+    t.string   "encrypted_consumer_secret"
+    t.string   "encrypted_consumer_secret_iv"
+    t.string   "encrypted_access_token"
+    t.string   "encrypted_access_token_iv"
+    t.string   "encrypted_access_token_secret"
+    t.string   "encrypted_access_token_secret_iv"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "product_reviews", force: :cascade do |t|
     t.string   "reviewer",    null: false
@@ -35,7 +64,7 @@ ActiveRecord::Schema.define(version: 20170504060810) do
     t.string   "label"
     t.string   "number_of_pages"
     t.string   "product_group"
-    t.date     "publication_date"
+    t.string   "publication_date"
     t.string   "manufacturer"
     t.string   "publisher"
     t.string   "studio"
@@ -55,10 +84,10 @@ ActiveRecord::Schema.define(version: 20170504060810) do
     t.string   "description"
     t.string   "link"
     t.string   "guid"
-    t.datetime "tweeted_date"
+    t.integer  "status",      default: 0
     t.integer  "rss_site_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["link"], name: "index_rss_items_on_link", unique: true
     t.index ["rss_site_id"], name: "index_rss_items_on_rss_site_id"
   end
