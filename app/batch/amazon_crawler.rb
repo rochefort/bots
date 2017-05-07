@@ -91,9 +91,11 @@ module Batch
 
           reviews.each do |review|
             row = review.search("div.a-row")
+            reviewer_elm = review.search("span.a-size-normal a.noTextDecoration")[0]
             product_review = product.product_reviews.find_or_initialize_by(
-              title: review.search("span.a-size-normal a.noTextDecoration").text,
-              reviewer: row.search(".a-size-base.a-text-bold").text()
+              reviewer: reviewer_elm.text,
+              reviewer_id: reviewer_elm.attribute("href").value.match(%r{profile/(.+?)/}).to_a[1],
+              title: row.search(".a-size-base.a-text-bold").text()
             )
             product_review.update!(
               description: reviews.search("div[id^=revData-] .a-section").text.strip,
