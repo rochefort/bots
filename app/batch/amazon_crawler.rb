@@ -39,9 +39,8 @@ module Batch
         }
         res = nil
         Retryable.retryable(on: [Amazon::RequestError], tries: 4, sleep: 4) do |retries, exception|
-          # puts "#{retries}: #{options}"
           res = Amazon::Ecs.item_search(keyword, options)
-          puts "try #{retries} failed with exception: #{exception}" if retries > 0
+          Rails.logger.error "try #{retries} failed with exception: #{exception}" if retries > 0
         end
         result += res.items
         return result if item_page >= res.total_pages
@@ -79,7 +78,7 @@ module Batch
         page = nil
         Retryable.retryable(tries: 3, sleep: 3) do |retries, exception|
           page = @agent.get(url)
-          puts "try #{retries}, code: #{page&.code} failed with exception: #{exception}" unless page&.code == "200"
+          Rails.logger.error "try #{retries}, code: #{page&.code} failed with exception: #{exception}" unless page&.code == "200"
         end
         return unless page.title
 
@@ -104,8 +103,8 @@ module Batch
           end
         end
       rescue => e
-        puts "Error Occured (asin: #{asin}) #{e}"
-        puts e.backtrace
+        Rails.logger.error "Error Occured (asin: #{asin}) #{e}"
+        Rails.logger.error e.backtrace
       end
 
       def extract_score(str)

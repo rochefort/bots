@@ -13,7 +13,7 @@ module Batch
       def relate_item(account, rss_item)
         account.rss_items << rss_item
       rescue ActiveRecord::RecordNotUnique => e
-        puts "Not unique"
+        # do nothing
       end
   end
 end
