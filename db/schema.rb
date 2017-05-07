@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170506074745) do
 
   create_table "product_reviews", force: :cascade do |t|
     t.string   "reviewer",    null: false
+    t.string   "reviewer_id", null: false
     t.string   "title",       null: false
     t.string   "description", null: false
     t.date     "review_date", null: false
