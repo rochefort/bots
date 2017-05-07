@@ -15,4 +15,5 @@ puts "Account: #{Account.count} created"
 RssSite.destroy_all
 RssSite.create!(id: 1, title: "Goal,com",   url: "http://www.goal.com/jp/feeds/news?fmt=rss&ICID=OP")
 RssSite.create!(id: 2, title: "SoccerKing", url: "http://www.soccer-king.jp/RSS.rdf")
+RssSite.create!(id: 3, title: "Yahoo",      url: "https://headlines.yahoo.co.jp/rss/all-c_spo.xml")
 puts "RssSite: #{RssSite.count} created"
