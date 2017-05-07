@@ -7,6 +7,6 @@ class CreateAccountRssItems < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :account_rss_items, [:account, :rss_item], unique: true
+    add_index :account_rss_items, [:account_id, :rss_item_id], unique: true
   end
 end

@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20170506074745) do
     t.datetime "tweeted_date"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["account_id", "rss_item_id"], name: "index_account_rss_items_on_account_id_and_rss_item_id", unique: true
     t.index ["account_id"], name: "index_account_rss_items_on_account_id"
     t.index ["rss_item_id"], name: "index_account_rss_items_on_rss_item_id"
-    t.index [nil, nil], name: "index_account_rss_items_on_account_and_rss_item", unique: true
   end
 
   create_table "accounts", force: :cascade do |t|
