@@ -98,7 +98,7 @@ module Batch
               title: row.search(".a-size-base.a-text-bold").text()
             )
             product_review.update!(
-              description: reviews.search("div[id^=revData-] .a-section").text.strip,
+              description: review.search("div[id^=revData-] .a-section").text.strip,
               review_date: row.search(">.a-color-secondary>.a-color-secondary").text.tr("投稿日", "").strip.to_date,
               score: extract_score(row.search(".a-icon.a-icon-star").text())
             )
