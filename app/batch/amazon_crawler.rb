@@ -87,7 +87,8 @@ module Batch
         Product.transaction do
           product = Product.where(asin: asin).first
           return unless product
-          product.update!(score: extract_score(page.search(".a-icon.a-icon-star")[0].text()))
+          score_str = page.search(".a-icon.a-icon-star")[0]&.text()
+          product.update!(score: extract_score(score_str)) if score_str
 
           reviews.each do |review|
             row = review.search("div.a-row")
