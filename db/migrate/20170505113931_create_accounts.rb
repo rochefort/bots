@@ -4,7 +4,7 @@ class CreateAccounts < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :note
       t.string :associate_tag
-      t.integer :status
+      t.integer :status, default: 0
       t.string :keywords
       t.string :encrypted_consumer_key
       t.string :encrypted_consumer_key_iv

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170506074745) do
     t.string   "name"
     t.string   "note"
     t.string   "associate_tag"
-    t.integer  "status"
+    t.integer  "status",                           default: 0
     t.string   "keywords"
     t.string   "encrypted_consumer_key"
     t.string   "encrypted_consumer_key_iv"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20170506074745) do
     t.string   "encrypted_access_token_iv"
     t.string   "encrypted_access_token_secret"
     t.string   "encrypted_access_token_secret_iv"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   create_table "product_reviews", force: :cascade do |t|
