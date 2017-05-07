@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
-  attr_encrypted :consumer_key, key: BOTS_ENCRYPTED_KEY
-  attr_encrypted :consumer_secret, key: BOTS_ENCRYPTED_KEY
-  attr_encrypted :access_token, key: BOTS_ENCRYPTED_KEY
+  attr_encrypted :consumer_key,        key: BOTS_ENCRYPTED_KEY
+  attr_encrypted :consumer_secret,     key: BOTS_ENCRYPTED_KEY
+  attr_encrypted :access_token,        key: BOTS_ENCRYPTED_KEY
   attr_encrypted :access_token_secret, key: BOTS_ENCRYPTED_KEY
 
   has_many :account_rss_items
