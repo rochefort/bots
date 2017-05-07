@@ -8,7 +8,7 @@ class Account < ApplicationRecord
   has_many :rss_items, through: :account_rss_items
 
   def about_myself?(*words)
-    keywords = self.keywords&.split("\n") || []
+    keywords = self.keywords&.split || []
     keywords.any? do |keyword|
       words.join.include?(keyword)
     end
