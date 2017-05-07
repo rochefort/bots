@@ -13,8 +13,8 @@ module Batch
             link: item.link,
             title: item.title,
             pub_date: ymdhms(item.date),
-            description: strip_tags(item.description).gsub(/\A　*/, ""),
-            guid: item.guid.content,
+            description: strip_tags(item.description)&.gsub(/\A　*/, ""),
+            guid: item&.guid&.content,
             rss_site: site
           )
         end
