@@ -12,7 +12,7 @@ module Batch
           RssItem.create!(
             link: item.link,
             title: item.title,
-            pub_date: ymdhms(item.date),
+            pub_date: item.date.strftime("%Y-%m-%d %H:%M:%S"),
             description: strip_tags(item.description)&.gsub(/\A　*/, ""),
             guid: item&.guid&.content,
             rss_site: site
@@ -20,12 +20,6 @@ module Batch
         end
       end
     end
-
-    private
-      # TODO: change rails style
-      def ymdhms(time)
-        time.strftime("%Y-%m-%d %H:%M:%S")
-      end
   end
 end
 
