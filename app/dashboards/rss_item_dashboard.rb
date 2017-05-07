@@ -29,9 +29,13 @@ class RssItemDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :account_rss_items,
-    :accounts,
-    :rss_site,
+    # :accounts,
+    # :rss_site,
     :id,
+    :title,
+    :status,
+    :pub_date,
+    :description,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

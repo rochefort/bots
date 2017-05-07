@@ -29,6 +29,8 @@ class ProductReviewDashboard < Administrate::BaseDashboard
     :id,
     :reviewer,
     :title,
+    :score,
+    :description,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

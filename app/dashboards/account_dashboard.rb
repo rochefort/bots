@@ -38,10 +38,11 @@ class AccountDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :account_rss_items,
-    :rss_items,
     :id,
     :name,
+    :note,
+    :rss_items,
+    # :account_rss_items,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
