@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506074745) do
+ActiveRecord::Schema.define(version: 20170508045540) do
 
   create_table "account_rss_items", force: :cascade do |t|
     t.integer  "account_id",   null: false
@@ -39,6 +39,27 @@ ActiveRecord::Schema.define(version: 20170506074745) do
     t.string   "encrypted_access_token_secret_iv"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.string   "name_alias"
+    t.string   "position"
+    t.integer  "number"
+    t.string   "birth_date"
+    t.string   "height"
+    t.string   "weight"
+    t.string   "hometown"
+    t.string   "former_team"
+    t.string   "twitter_account"
+    t.string   "instagram_account"
+    t.string   "blog_url"
+    t.string   "chant"
+    t.integer  "status",            default: 0
+    t.integer  "account_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["account_id"], name: "index_players_on_account_id"
   end
 
   create_table "product_reviews", force: :cascade do |t|
