@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170508045540) do
     t.string   "twitter_account"
     t.string   "instagram_account"
     t.string   "blog_url"
+    t.string   "blog_rss_url"
     t.string   "chant"
     t.integer  "status",            default: 0
     t.integer  "account_id"

@@ -22,6 +22,7 @@ class PlayerDashboard < Administrate::BaseDashboard
     twitter_account: Field::String,
     instagram_account: Field::String,
     blog_url: Field::String,
+    blog_rss_url: Field::String,
     chant: Field::String,
     status: Field::Number,
     created_at: Field::DateTime,
@@ -42,8 +43,8 @@ class PlayerDashboard < Administrate::BaseDashboard
     :weight,
     :hometown,
     :status,
-    # :twitter_account,
-    # :blog_url,
+    :twitter_account,
+    :blog_url,
     :account,
   ].freeze
 
@@ -64,6 +65,7 @@ class PlayerDashboard < Administrate::BaseDashboard
     :twitter_account,
     :instagram_account,
     :blog_url,
+    :blog_rss_url,
     :chant,
     :status,
     :created_at,
@@ -87,6 +89,7 @@ class PlayerDashboard < Administrate::BaseDashboard
     :twitter_account,
     :instagram_account,
     :blog_url,
+    :blog_rss_url,
     :chant,
     :status,
   ].freeze

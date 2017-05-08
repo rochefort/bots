@@ -13,6 +13,7 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.string :twitter_account
       t.string :instagram_account
       t.string :blog_url
+      t.string :blog_rss_url
       t.string :chant
       t.integer :status, default: 0
       t.references :account, foreign_key: true
