@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508045540) do
+ActiveRecord::Schema.define(version: 20170508065739) do
 
   create_table "account_rss_items", force: :cascade do |t|
     t.integer  "account_id",   null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20170508045540) do
     t.string   "encrypted_access_token_secret_iv"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.string   "favorite_account_id"
+    t.string   "status",              default: "0"
+    t.integer  "account_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["account_id"], name: "index_favorites_on_account_id"
   end
 
   create_table "players", force: :cascade do |t|

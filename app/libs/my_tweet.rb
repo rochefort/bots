@@ -18,5 +18,10 @@ class MyTweet
   ensure
     sleep 1
   end
+
+  def fav_and_retweet(id)
+    result = @client.favorite(id)
+    @client.retweet(id) unless result.empty?
+    sleep 3
   end
 end
