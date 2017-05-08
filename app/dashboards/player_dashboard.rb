@@ -23,7 +23,7 @@ class PlayerDashboard < Administrate::BaseDashboard
     instagram_account: Field::String,
     blog_url: Field::String,
     blog_rss_url: Field::String,
-    chant: Field::String,
+    chant: Field::Text,
     status: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
