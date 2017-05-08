@@ -15,5 +15,8 @@ class MyTweet
   rescue => e
     Rails.logger.error e
     Rails.logger.error e.backtrace
+  ensure
+    sleep 1
+  end
   end
 end
