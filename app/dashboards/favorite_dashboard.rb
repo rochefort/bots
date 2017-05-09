@@ -11,7 +11,7 @@ class FavoriteDashboard < Administrate::BaseDashboard
     account: Field::BelongsTo,
     id: Field::Number,
     favorite_account_id: Field::String,
-    status: Field::String,
+    status: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
