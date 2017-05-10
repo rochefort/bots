@@ -19,7 +19,6 @@ namespace :deploy do
   desc "deploy to server and restart service with migrating and precomiling"
   task :all do
     remote_cmds = [
-      "cd work/rails/bots",
       "git pull",
       "bundle",
       "RAILS_ENV=production bundle exec rake db:migrate",
@@ -32,7 +31,6 @@ namespace :deploy do
   desc "deploy to server and restart service"
   task :simple do
     remote_cmds = [
-      "cd work/rails/bots",
       "git pull",
       "passenger-config restart-app ."
     ]
@@ -41,6 +39,7 @@ namespace :deploy do
 end
 
 def ssh_excutes(cmds)
-  sh "git push"
+  default_cmd = "cd work/rails/bots"
+  cmds.unshift(default_cmd)
   sh "ssh sakura '#{cmds.join(" && ")}'"
 end
