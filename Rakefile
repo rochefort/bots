@@ -6,9 +6,12 @@ require_relative "config/application"
 Rails.application.load_tasks
 
 namespace :stats do
-  desc "未ツイート件数を表示"
+  desc "Print tweets info"
   task tweet: :environment do
-    puts "Untweeted count: "
+    puts "-- RssItem count"
+    puts RssItem.count
+    puts
+    puts "-- Untweeted count"
     Account.all.each do |account|
       puts "#{account.name}: #{account.account_rss_items.where("account_rss_items.tweeted_date": nil).count}"
     end
@@ -40,7 +43,7 @@ end
 
 namespace :remote do
   namespace :stats do
-    desc "サーバーの未ツイート件数を表示"
+    desc "Print remote tweets info"
     task tweet: :environment do
       remote_cmds = [
         "RAILS_ENV=production bundle exec rake stats:tweet"
