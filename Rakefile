@@ -38,6 +38,18 @@ namespace :deploy do
   end
 end
 
+namespace :remote do
+  namespace :stats do
+    desc "サーバーの未ツイート件数を表示"
+    task tweet: :environment do
+      remote_cmds = [
+        "RAILS_ENV=production bundle exec rake stats:tweet"
+      ]
+      ssh_excutes(remote_cmds)
+    end
+  end
+end
+
 def ssh_excutes(cmds)
   default_cmd = "cd work/rails/bots"
   cmds.unshift(default_cmd)
