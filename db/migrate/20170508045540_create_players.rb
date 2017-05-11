@@ -5,7 +5,7 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.string :name_alias
       t.string :position
       t.integer :number
-      t.string :birth_date
+      t.date :birth_date
       t.string :height
       t.string :weight
       t.string :hometown
