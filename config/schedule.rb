@@ -19,15 +19,31 @@
 
 # Learn more: http://github.com/javan/whenever
 
+# every "15 * * * *" do
+#   runner "app/batch/rss_crawler.rb"
+#   runner "app/batch/rss_classication.rb"
+# end
+
 every "15 * * * *" do
-  runner "app/batch/rss_crawler.rb"
-  runner "app/batch/rss_classication.rb"
+  runner "RssCrawlerBatch.new.run"
+end
+
+every "20 * * * *" do
+  runner "RssSorterBatch.new.run"
+end
+
+every 30.minutes do
+  runner "FavTwitterBatch.new.run"
 end
 
 every 12.minutes do
-  runner "app/batch/rss_twitter.rb"
+  runner "RssTwitterBatch.new.run"
 end
 
 every 1.day, at: "3:00am" do
-  runner "app/batch/amazon_crawler.rb"
+  runner "AmazonCrawlerBatch.new.run('サッカー')"
+end
+
+every 1.day, at: "3:20am" do
+  runner "AmazonCrawlerBatch.new.run('フロンターレ')"
 end
