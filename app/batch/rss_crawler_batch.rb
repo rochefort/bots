@@ -8,6 +8,7 @@ class RssCrawlerBatch
       rss = RSS::Parser.parse(site.url, false)
       rss.items.each do |item|
         next if RssItem.find_by(link: item.link)
+        next if site.include_ignore_keywords?(item.title)
         RssItem.create!(
           link: item.link,
           title: item.title,

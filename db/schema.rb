@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508065739) do
+ActiveRecord::Schema.define(version: 20170513152138) do
 
   create_table "account_rss_items", force: :cascade do |t|
     t.integer  "account_id",   null: false
@@ -127,8 +127,9 @@ ActiveRecord::Schema.define(version: 20170508065739) do
   create_table "rss_sites", force: :cascade do |t|
     t.string   "title"
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "ignore_keywords"
     t.index ["title"], name: "index_rss_sites_on_title", unique: true
     t.index ["url"], name: "index_rss_sites_on_url", unique: true
   end
