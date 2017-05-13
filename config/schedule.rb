@@ -36,7 +36,7 @@ every 30.minutes do
   runner "FavTwitterBatch.new.run"
 end
 
-every 12.minutes do
+every 15.minutes do
   runner "RssTwitterBatch.new.run"
 end
 
