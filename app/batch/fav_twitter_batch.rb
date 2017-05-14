@@ -7,14 +7,16 @@ class FavTwitterBatch
     Account.all.each do |account|
       ids = account.favorites.where(status: :active).pluck(:favorite_account_id)
       ids += account.players.where("twitter_account is not null").pluck(:twitter_account)
-      client = TwitterClient.new(account)
-      favs_and_retweets(client, ids)
+      favs_and_retweets(account, ids)
     end
   end
 
   private
-    def favs_and_retweets(client, user_ids)
-      guids = parse_guids(user_ids)
+    def favs_and_retweets(account, user_ids)
+      client = TwitterClient.new(account)
+      rss_guids = parse_guids(user_ids)
+      tweeted_guids = account.favorite_items.pluck(:guid)
+      guids = rss_guids - tweeted_guids
       guids.sort.reverse.each { |guid| client.fav_and_retweet(guid) }
     end
 

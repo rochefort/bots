@@ -6,6 +6,7 @@ class Account < ApplicationRecord
 
   has_many :account_rss_items
   has_many :favorites
+  has_many :favorite_items
   has_many :players
   has_many :rss_items, through: :account_rss_items
 
