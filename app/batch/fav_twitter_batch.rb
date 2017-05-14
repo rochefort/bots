@@ -13,9 +13,14 @@ class FavTwitterBatch
   end
 
   private
-    def favs_and_retweets(client, ids)
+    def favs_and_retweets(client, user_ids)
+      guids = parse_guids(user_ids)
+      guids.sort.reverse.each { |guid| client.fav_and_retweet(guid) }
+    end
+
+    def parse_guids(user_ids)
       guids = []
-      ids.each do |user|
+      user_ids.each do |user|
         rss_url = "#{USER_RSS}#{user}"
         rss = RSS::Parser.parse(rss_url)
         rss.items.each do |item|
@@ -23,6 +28,6 @@ class FavTwitterBatch
           guids << guid if guid
         end
       end
-      guids.sort.reverse.each { |guid| client.fav_and_retweet(guid) }
+      guids
     end
 end
