@@ -1,7 +1,7 @@
 class RssTwitterBatch
   def run
     Account.all.each do |account|
-      client = MyTweet.new(account)
+      client = TwitterClient.new(account)
       relation = account.account_rss_items.where("account_rss_items.tweeted_date": nil).order(:id).first
       return unless relation
       msg = generate_tweet(relation.rss_item)

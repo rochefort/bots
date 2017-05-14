@@ -1,6 +1,6 @@
 require "twitter"
 
-class MyTweet
+class TwitterClient
   def initialize(account)
     @client = Twitter::REST::Client.new do |c|
       c.consumer_key        = account.consumer_key
