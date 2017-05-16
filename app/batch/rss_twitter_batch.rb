@@ -11,15 +11,6 @@ class RssTwitterBatch
   end
 
   private
-    def generate_twitter_client(account)
-      Twitter::REST::Client.new do |c|
-        c.consumer_key        = account.consumer_key
-        c.consumer_secret     = account.consumer_secret
-        c.access_token        = account.access_token
-        c.access_token_secret = account.access_token_secret
-      end
-    end
-
     def generate_tweet(rss_item)
       r = rss_item
       title = "[#{r.rss_site.title}]#{r.title}"
