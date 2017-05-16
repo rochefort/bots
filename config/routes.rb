@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :accounts
     resources :account_rss_items
     resources :favorites
+    resources :favorite_items
     resources :players
     resources :products
     resources :product_reviews
