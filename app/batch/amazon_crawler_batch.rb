@@ -5,7 +5,6 @@ require "retryable"
 class AmazonCrawlerBatch
   MAX_ITEM_PAGE = 10 # APIの仕様上10まで
   MAX_RETRY_COUNT = 3
-  PRODUCT_URL = "https://www.amazon.co.jp/dp/"
 
   def initialize
     c = Rails.application.secrets.aws_config

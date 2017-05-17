@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   has_many :favorites
   has_many :favorite_items
   has_many :players
+  has_many :product_tweets
   has_many :rss_items, through: :account_rss_items
 
   def about_myself?(*words)

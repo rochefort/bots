@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514081621) do
+ActiveRecord::Schema.define(version: 20170516082511) do
 
   create_table "account_rss_items", force: :cascade do |t|
     t.integer  "account_id",   null: false
@@ -93,6 +93,15 @@ ActiveRecord::Schema.define(version: 20170514081621) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["product_id"], name: "index_product_reviews_on_product_id"
+  end
+
+  create_table "product_tweets", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_product_tweets_on_account_id"
+    t.index ["product_id"], name: "index_product_tweets_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
