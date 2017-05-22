@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(version: 20170516082511) do
 
   create_table "favorites", force: :cascade do |t|
     t.string   "favorite_account_id"
-    t.string   "status",              default: "0"
+    t.integer  "status",              default: 0
     t.integer  "account_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["account_id"], name: "index_favorites_on_account_id"
   end
 
