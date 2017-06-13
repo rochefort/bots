@@ -16,7 +16,7 @@ class CelebratorBatch
     def celebrate_birth
       Account.all.each do |account|
         celebs = account.players.select { |pl| pl.birth_date.month == Date.today.month && pl.birth_date.day == Date.today.day }
-        messages = celebs.map do |player|
+        body = celebs.map do |player|
           number = "%2d" % player.number
           "#{player.position} #{number} #{player.name} 選手(#{player.birth_date})"
         end
