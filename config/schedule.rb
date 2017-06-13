@@ -48,7 +48,7 @@ every 1.day, at: "3:20am" do
   runner "AmazonCrawlerBatch.new.run('フロンターレ')"
 end
 
-every 1.month, at: "7:00am" do
+every :day, at: "7:00am" do
   runner "CelebratorBatch.celebrate_birth"
 end
 
